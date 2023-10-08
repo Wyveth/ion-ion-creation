@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TagComponent } from 'src/app/views/administration/tag/tag.component';
 
 const routes: Routes = [
-  { path: 'tags', loadComponent: () => import('src/app/views/administration/tag/tag.component').then(m => m.TagComponent) }
+  { path: '', loadComponent: () => import('src/app/views/administration/tag/tag.component').then(m => m.TagComponent) },
   // { path: 'categories', loadChildren: () => import('./modules/category/category.module').then(m => m.CategoryModule) },
   // { path: 'posts', loadChildren: () => import('./modules/post/post.module').then(m => m.PostModule) },
   // { path: 'users', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
