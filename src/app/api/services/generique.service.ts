@@ -1,19 +1,16 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { DocumentData } from '@angular/fire/compat/firestore';
 import { Subject } from 'rxjs';
-import { CollectionReference, Firestore, collection, collectionData, doc, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, WithFieldValue, addDoc, collection, collectionData, deleteDoc, doc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
-import { object } from '@angular/fire/database';
-
-
 @Injectable({
   providedIn: 'root'
 })
-export class GeneriqueService<T> {
+export abstract class GeneriqueService<T> {
   private db: CollectionReference<DocumentData>;
   subject = new Subject<T[]>();
 
-  constructor(private utilsService: UtilsService, private firestore: Firestore, @Inject('collectionName') private collectionName: string) {
+  constructor(private utilsService: UtilsService, private firestore: Firestore, private collectionName: string) {
     this.db = collection(this.firestore, this.collectionName);
     this.getAll();
    }
@@ -23,37 +20,46 @@ export class GeneriqueService<T> {
   }
 
   async getAll() {
-    console.log('Chargement de la collection...');
-
     const querySnapshot = await getDocs(this.db);
+
     this.emit(querySnapshot.docs.map((e: any) => {
-      console.log(e);
       return {
-        id: e.payload.doc.id,
-        ...e.payload.doc.data()
+        key: e.data().key,
+        ...e.data()
       } as T;
     }));
   }
 
-  async create(obj: T extends { [key: string]: unknown } ? T : never) {
-    const objEntries = Object.entries(obj) as [string, unknown][];
-    await setDoc(doc(this.db, this.collectionName, this.utilsService.getKey()), objEntries);
+  create(obj: WithFieldValue<T>) {
+    addDoc<T>(this.db as CollectionReference<T>, obj);
+
+    this.getAll();
   }
 
-  update(key: string, obj: T extends { [key: string]: unknown } ? T : never) {
-    const objEntries = Object.entries(obj) as [string, unknown][];
-    const docRef = doc(this.db, this.collectionName, obj['key'] as string);
+    update(key: string, obj: WithFieldValue<T>) {
+      this.utilsService.getDocByKey(this.db, key).then((doc: any) => {
+        updateDoc<T>(doc.ref, obj as any);
+      });
+    }
 
-    // this.utilsService.getDocByKey(this.db, key).then((doc: any) => {
-    //   updateDoc(doc.ref, objEntries);
-    // });
+    delete(key: string) {
+      this.utilsService.getDocByKey(this.db, key).then((doc: any) => {
+        deleteDoc(doc.ref);
+      });
+
+      this.getAll();
+    }
+
+    get(key: string) {
+      var qry = query(this.db, where("key", "==", key));
+
+        getDocs(qry).then((querySnapshot) => {
+          if (querySnapshot) {
+            console.log("Document data:", querySnapshot);
+            querySnapshot.docs.forEach(element => {
+              return element.data() as T;
+            });
+          } 
+        });
+    }
   }
-
-  // delete(id: string) {
-  //   return this.db.collection(this.collectionName).doc(id).delete();
-  // }
-
-  // get(id: string) {
-  //   return this.db.collection<T>(this.collectionName).doc(id).snapshotChanges();
-  // }
-}

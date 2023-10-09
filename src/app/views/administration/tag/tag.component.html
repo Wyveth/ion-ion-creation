@@ -1,3 +1,10 @@
-<p>
-  tag works!
+<div [formGroup]="tagForm">
+  <input type="text" formControlName="code">
+  <input type="text" formControlName="libelle">
+  <input type="text" formControlName="description">
+  <button (click)="createTag()">create</button>
+</div>
+<p *ngFor="let item of tags">
+  {{item.key}}<button (click)="deleteTag(item.key)">Delete</button>
 </p>
+

@@ -4,15 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule} from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './shared/modules/app-routing.module';
-import { GeneriqueService } from './api/services/generique.service';
-import { TagComponent } from './views/administration/tag/tag.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
@@ -23,6 +16,7 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { MenuComponent } from './shared/components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -41,9 +35,10 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
-    AppRoutingModule
+    AppRoutingModule,
+    MenuComponent
   ],
-  providers: [GeneriqueService, { provide: 'collectionName', useValue: 'tags' }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

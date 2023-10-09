@@ -1,5 +1,5 @@
-export interface Base {
-    key?: string;
-    created_at?: Date;
-    updated_at?: Date;
+export interface BaseInterface {
+    key: string;
+    created_at?: string;
+    updated_at?: string;
 }
