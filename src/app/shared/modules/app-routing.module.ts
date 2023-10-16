@@ -1,9 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TagComponent } from 'src/app/views/administration/tag/tag.component';
+import { LayoutComponent } from '../components/administration/layout/layout.component';
 
 const routes: Routes = [
-  { path: '', loadComponent: () => import('src/app/views/administration/tag/tag.component').then(m => m.TagComponent) },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import(
+            'src/app/views/administration/dashboard/dashboard.component'
+          ).then((m) => m.DashboardComponent),
+      },
+    ],
+  },
   // { path: 'categories', loadChildren: () => import('./modules/category/category.module').then(m => m.CategoryModule) },
   // { path: 'posts', loadChildren: () => import('./modules/post/post.module').then(m => m.PostModule) },
   // { path: 'users', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
@@ -21,10 +34,10 @@ const routes: Routes = [
   // { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
   // { path: 'about', loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule) },
   // { path: 'contact', loadChildren: () => import('./modules/contact/contact.module').then(m => m.ContactModule) }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -6,7 +6,7 @@ import { UtilsService } from './utils.service';
 describe('Service: Utils', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UtilsService]
+      providers: [UtilsService],
     });
   });
 

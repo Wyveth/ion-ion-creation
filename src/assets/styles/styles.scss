@@ -1,3 +1,195 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "primeng/resources/themes/tailwind-light/theme.css";
+@import "primeng/resources/primeng.min.css";
+
+//@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "./layout/layout.scss";
+
+//PRIMARY COLOR
+$primary-100: #e9dffe;
+$primary-200: #d3c0fd;
+$primary-300: #bda0fc;
+$primary-400: #a781fb;
+$primary-500: #9262fa;
+$primary-600: #744ec8;
+$primary-700: #573a96;
+$primary-800: #3a2764;
+$primary-900: #1d1332;
+
+//SECONDARY COLOR
+$secondary-100: #fee2ed;
+$secondary-200: #fdc5db;
+$secondary-300: #fda8ca;
+$secondary-400: #fc8bb8;
+$secondary-500: #fc6ea7;
+$secondary-600: #c95885;
+$secondary-700: #974264;
+$secondary-800: #642c42;
+$secondary-900: #321621;
+
+//TERTIARY COLOR
+$tertiary-100: #d1f5fe;
+$tertiary-200: #a3ebfe;
+$tertiary-300: #75e1fe;
+$tertiary-400: #46d7fe;
+$tertiary-500: #19cdfe;
+$tertiary-600: #14a4cb;
+$tertiary-700: #0f7b98;
+$tertiary-800: #0a5265;
+$tertiary-900: #052932;
+
+//QUATERNARY COLOR
+$quaternary-100: #fff8d8;
+$quaternary-200: #fff1b2;
+$quaternary-300: #ffea8c;
+$quaternary-400: #ffe366;
+$quaternary-500: #ffdc40;
+$quaternary-600: #ccb033;
+$quaternary-700: #998426;
+$quaternary-800: #665819;
+$quaternary-900: #332c0c;
+
+//QUINARY COLOR
+$quinary-100: #d1d1d1;
+$quinary-200: #a4a4a4;
+$quinary-300: #777777;
+$quinary-400: #4a4a4a;
+$quinary-500: #1d1d1d;
+$quinary-600: #171717;
+$quinary-700: #111111;
+$quinary-800: #0b0b0b;
+$quinary-900: #050505;
+
+$white: #ffffff;
+$black: #000000;
+
+//Success
+$success: #28a745;
+$success-100: #e6f4ea;
+$success-200: #cce9d5;
+$success-300: #b3dfc0;
+$success-400: #99d4ab;
+$success-500: #80ca96;
+$success-600: #66bf81;
+$success-700: #4db46c;
+$success-800: #33aa57;
+$success-900: #1a9f42;
+
+//Info
+$info: #17a2b8;
+$info-100: #e3f4f8;
+$info-200: #c7e9f1;
+$info-300: #abdee9;
+$info-400: #8fd3e2;
+$info-500: #73c8db;
+$info-600: #57bdd4;
+$info-700: #3cb2cd;
+$info-800: #20a7c6;
+$info-900: #049cbf;
+
+//Warning
+$warning: #ffc107;
+$warning-100: #fff8e6;
+$warning-200: #fff1cc;
+$warning-300: #ffe9b3;
+$warning-400: #ffe299;
+$warning-500: #ffdb80;
+$warning-600: #ffd266;
+$warning-700: #ffca4d;
+$warning-800: #ffc333;
+$warning-900: #ffbb1a;
+
+//Danger
+$danger: #dc3545;
+$danger-100: #f8e6e9;
+$danger-200: #f1ccd3;
+$danger-300: #e9b3bd;
+$danger-400: #e299a7;
+$danger-500: #db8091;
+$danger-600: #d2667b;
+$danger-700: #ca4d65;
+$danger-800: #c3334f;
+$danger-900: #bb1a39;
+
+//Light
+$light: #f8f9fa;
+$light-100: #ffffff;
+$light-200: #ffffff;
+$light-300: #ffffff;
+$light-400: #ffffff;
+$light-500: #ffffff;
+$light-600: #e6e6e6;
+
+//Dark
+$dark: #343a40;
+$dark-100: #6f757a;
+$dark-200: #5c636a;
+$dark-300: #495057;
+$dark-400: #343a40;
+$dark-500: #212529;
+
+//Gray
+$gray: #868e96;
+$gray-100: #c8ced3;
+$gray-200: #b1b8bd;
+$gray-300: #9a9fa4;
+$gray-400: #868e96;
+$gray-500: #6f757a;
+$gray-600: #5c636a;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+
+.p-button {
+  background-color: transparent;
+  color: #4f46e5;
+  border-color: transparent;
+  
+  &.p-button-info,
+  .p-buttonset.p-button-info > .p-button,
+  .p-splitbutton.p-button-info > .p-button {
+    color: $white;
+    background: $info;
+    border: 1px solid $info-600;
+  }
+  &.p-button-success,
+  .p-buttonset.p-button-success > .p-button,
+  .p-splitbutton.p-button-success > .p-button {
+    background: $success;
+    border: 1px solid $success-600;
+  }
+
+  &.p-button-info,
+  .p-buttonset.p-button-info > .p-button,
+  .p-splitbutton.p-button-info > .p-button {
+    background: $info;
+    border: 1px solid $info-600;
+  }
+
+  &.p-button-warning,
+  .p-buttonset.p-button-warning > .p-button,
+  .p-splitbutton.p-button-warning > .p-button {
+    background: $warning;
+    border: 1px solid $warning-600;
+  }
+
+  &.p-button-danger,
+  .p-buttonset.p-button-danger > .p-button,
+  .p-splitbutton.p-button-danger > .p-button {
+    background: $danger;
+    border: 1px solid $danger-600;
+  }
+}
+
+.border-round {
+  border-radius: var(--border-radius) !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.card:last-child {
+  margin-bottom: 2rem;
+}

@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+src/assets/images/product-1.jpg
+src/assets/images/product-2.jpg
+.gitignore
+src/environments/environment.ts
+src/environments/environment.prod.ts
