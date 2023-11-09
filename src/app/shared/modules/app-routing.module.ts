@@ -15,6 +15,13 @@ const routes: Routes = [
             'src/app/views/administration/dashboard/dashboard.component'
           ).then((m) => m.DashboardComponent),
       },
+      {
+        path: 'tags',
+        loadComponent: () =>
+          import('src/app/views/administration/tag/tag.component').then(
+            (m) => m.TagComponent,
+          ),
+      },
     ],
   },
   // { path: 'categories', loadChildren: () => import('./modules/category/category.module').then(m => m.CategoryModule) },

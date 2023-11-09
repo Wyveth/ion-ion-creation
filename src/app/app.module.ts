@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,14 +20,27 @@ import {
   getRemoteConfig,
 } from '@angular/fire/remote-config';
 import { provideStorage, getStorage } from '@angular/fire/storage';
-import { MenuComponent } from './shared/components/administration/menu/menu.component';
+import { AppConfig } from './app.config';
+import { AppResource } from './app.resource';
+import { HttpClientModule } from '@angular/common/http';
+
+export function initConfig(config: AppConfig) {
+  return () => config.load();
+}
+
+export function initResource(resource: AppResource) {
+  return () => resource.load();
+}
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     StoreModule.forRoot({}, {}),
+    // Instrumentation must be imported after importing StoreModule
+    environment.imports,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
@@ -40,7 +53,22 @@ import { MenuComponent } from './shared/components/administration/menu/menu.comp
     provideStorage(() => getStorage()),
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    AppConfig,
+    AppResource,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initResource,
+      deps: [AppResource],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initConfig,
+      deps: [AppConfig],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -20,7 +20,7 @@ import { LayoutService } from 'src/app/shared/services/layout.service';
 import { MenuService } from 'src/app/shared/services/menu.service';
 
 @Component({
-  selector: 'app-menuitem',
+  selector: '[app-menuitem]',
   templateUrl: './menu-item.component.html',
   styleUrls: ['./menu-item.component.scss'],
   standalone: true,

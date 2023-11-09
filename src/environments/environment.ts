@@ -1,3 +1,5 @@
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 export const environment = {
   firebase: {
     apiKey: 'AIzaSyCwT95nBO8O-g7eYitRfGm84mDwxP5afUo',
@@ -11,4 +13,5 @@ export const environment = {
     measurementId: 'G-M3BJ5P9G6B',
   },
   production: false,
+  imports: [StoreDevtoolsModule.instrument({ maxAge: 25 })],
 };

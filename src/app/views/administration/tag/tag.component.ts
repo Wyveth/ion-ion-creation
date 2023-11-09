@@ -81,16 +81,15 @@ export class TagComponent implements OnInit {
     private confirmationService: ConfirmationService,
   ) {
     this.initForm();
-
-    this.tagSubscription = this._tagService.subject.subscribe(
-      (tags: TagInterface[]) => {
-        this.tags = tags;
-      },
-    );
   }
 
   ngOnInit() {
-    console.log(this.tags);
+    this.tagSubscription = this._tagService.subject.subscribe(
+      (tags: TagInterface[]) => {
+        this.tags = tags;
+        console.log(this.tags);
+      },
+    );
   }
 
   openNew() {

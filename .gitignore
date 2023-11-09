@@ -45,3 +45,5 @@ src/assets/images/product-2.jpg
 .gitignore
 src/environments/environment.ts
 src/environments/environment.prod.ts
+.firebase/hosting.cHVibGlj.cache
+.firebase/hosting.ZGlzdFxpb24taW9uLWNyZWF0aW9u.cache
