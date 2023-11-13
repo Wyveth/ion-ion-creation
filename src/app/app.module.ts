@@ -23,6 +23,9 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { AppConfig } from './app.config';
 import { AppResource } from './app.resource';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { SharedModule } from './shared/modules/shared.module';
 
 export function initConfig(config: AppConfig) {
   return () => config.load();
@@ -35,9 +38,7 @@ export function initResource(resource: AppResource) {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
+    SharedModule,
     StoreModule.forRoot({}, {}),
     // Instrumentation must be imported after importing StoreModule
     environment.imports,

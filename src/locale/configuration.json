@@ -1,0 +1,100 @@
+{
+    "layout": {
+        "config": {
+            "scale": "Scale",
+            "menu_type": "Menu Type",
+            "static": "Static",
+            "overlay": "Overlay",
+            "input_style": "Input Style",
+            "outlined": "Outlined",
+            "filled": "Filled",
+            "ripple_effect": "Ripple Effect"
+        },
+        "footer": {
+            "title": "Ion-Ion Creation"
+        },
+        "topbar": {
+            "calendrier": "Calendrier",
+            "notifications": "Notifications",
+            "messages": "Messages",
+            "profil": "Profil"
+        }
+    },
+    "toast": {
+        "error": "Erreur",
+        "errorDescription": "Une erreur est survenue",
+        "success": "Succès",
+        "warning": "Attention",
+        "info": "Information",
+        "confirm": "Confirmation",
+        "confirmDescriptionM": "Êtes vous sûr de vouloir supprimer le {0} sélectionné?",
+        "confirmDescriptionF": "Êtes vous sûr de vouloir supprimer la {0} sélectionnée?",
+        "confirmDescriptionP": "Êtes-vous sûr de vouloir supprimer les {0} sélectionné(e)s?"
+    },
+    "table": {
+        "new": "Nouveau",
+        "new_format": "Nouveau {0}",
+        "newOK ": "{0} créé(e)",
+        "edit": "Modifier",
+        "edit_format": "Modifier {0}",
+        "updateOK": "{0} mis(e) à jour",
+        "delete": "Supprimer",
+        "delete_format": "{0} supprimé(e)",
+        "deleteP_format": "{0} supprimé(e)s",
+        "manage": "Gérer {0}",
+        "search": "Rechercher...",
+        "export": {
+            "codeCSV": "CSV",
+            "csv": "Exporter en CSV",
+            "codeCSV_P": "CSVF",
+            "csv_p": "Exporter seulement les lignes sélectionnées en CSV",
+            "codeExcel": "XLS",
+            "excel": "Exporter en Excel",
+            "codePdf": "PDF",
+            "pdf": "Exporter en PDF"
+        },
+        "columnHeader": {
+            "code": "Code",
+            "libelle": "Libellé",
+            "description": "Description",
+            "actions": "Actions"
+        },
+        "columnTemplate": {
+            "text": "text",
+            "date": "date",
+            "datetime": "datetime",
+            "time": "time",
+            "number": "number",
+            "currency": "currency",
+            "boolean": "boolean",
+            "action": "action"
+        }
+    },
+    "db": {
+        "tag": "Tag",
+        "category": "Catégorie",
+        "properties": {
+            "key": "key",
+            "code": "code",
+            "libelle": "libelle",
+            "description": "description",
+            "created_at": "created_at",
+            "updated_at": "updated_at"
+        }
+    },
+    "filter": {
+        "contains": "contains"
+    },
+    "form": {
+        "mandatory": "{0} est obligatoire",
+        "invalidEmail": "Email invalide",
+        "invalidUrl": "Url invalide",
+        "invalidPatternMessage": "Le format de {0} est invalide",
+        "invalidPatternMessageDetail": "Le format de {0} est invalide. Le format attendu est {1}",
+        "invalidPatternMessageDetail2": "Le format de {0} est invalide. Le format attendu est {1} ou {2}",
+        "cancel": "Annuler",
+        "save": "Sauvegarder",
+        "yes": "Oui",
+        "no": "Non"
+    }
+}

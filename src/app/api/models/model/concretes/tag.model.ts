@@ -1,7 +1,7 @@
-import { TagInterface } from '../../interface/concretes/tag.interface';
+import { ITag } from '../../interface/concretes/tag.interface';
 import { Base } from '../abstracts/base.model';
 
-export class Tag extends Base implements TagInterface {
+export class Tag extends Base implements ITag {
   code: string;
   libelle: string;
   description: string;

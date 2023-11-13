@@ -1,6 +1,6 @@
-import { BaseInterface } from '../abstracts/base.interface';
+import { IBase } from '../abstracts/base.interface';
 
-export interface TagInterface extends BaseInterface {
+export interface ITag extends IBase {
   code: string;
   libelle: string;
   description: string;

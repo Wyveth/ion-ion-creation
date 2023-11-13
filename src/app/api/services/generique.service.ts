@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { DocumentData } from '@angular/fire/compat/firestore';
 import { Subject } from 'rxjs';
 import {
@@ -7,23 +7,21 @@ import {
   WithFieldValue,
   addDoc,
   collection,
-  collectionData,
   deleteDoc,
-  doc,
   getDocs,
   query,
-  setDoc,
   updateDoc,
   where,
 } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
+import { IBase } from '../models/interface/abstracts/base.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export abstract class GeneriqueService<T> {
-  private _db: CollectionReference<DocumentData>;
-  
+export class GeneriqueService<T extends IBase> {
+  protected _db: CollectionReference<DocumentData>;
+
   get db(): CollectionReference<DocumentData> {
     return this._db;
   }
@@ -31,59 +29,62 @@ export abstract class GeneriqueService<T> {
   subject = new Subject<T[]>();
 
   constructor(
-    private utilsService: UtilsService,
-    private firestore: Firestore,
-    private collectionName: string,
+    protected utilsService: UtilsService,
+    protected firestore: Firestore,
+    @Inject('collectionName') protected collectionName: string,
   ) {
-    this._db = collection(this.firestore, this.collectionName);
-    this.getAll();
+    this._db = collection(firestore, this.collectionName);
   }
 
   emit(array: T[]) {
-    console.log(array);
-    this.subject.next(array.splice(0));
+    this.subject.next(array.slice(0));
   }
 
-  async getAll() {
-    const querySnapshot = await getDocs(this.db);
-
-    this.emit(
-      querySnapshot.docs.map((e: any) => {
-        return {
-          key: e.data().key,
-          ...e.data(),
-        } as T;
-      }),
-    );
+  getAll() {
+    getDocs(this.db).then((querySnapshot) => {
+      this.emit(
+        querySnapshot.docs.map((e: any) => {
+          return {
+            key: e.data().key,
+            ...e.data(),
+          } as T;
+        }),
+      );
+    });
   }
 
   create(obj: WithFieldValue<T>) {
-    addDoc<T>(this.db as CollectionReference<T>, obj);
-
-    this.getAll();
+    addDoc<T>(this.db as CollectionReference<T>, obj).finally(() => {
+      this.getAll();
+    });
   }
 
   update(key: string, obj: WithFieldValue<T>) {
     this.utilsService.getDocByKey(this.db, key).then((doc: any) => {
-      updateDoc<T>(doc.ref, obj as any);
+      updateDoc<T>(doc.ref, obj as any).then(() => {
+        this.getAll();
+      });
     });
-
-    this.getAll();
   }
 
   delete(key: string) {
     this.utilsService.getDocByKey(this.db, key).then((doc: any) => {
-      deleteDoc(doc.ref);
+      deleteDoc(doc.ref).finally(() => {
+        this.getAll();
+      });
     });
-
-    this.getAll();
   }
 
-  deleteMultiple(keys: (T & { key: string })[]) {
-    keys.forEach((obj) => {
-      this.utilsService.getDocByKey(this.db, obj.key).then((doc: any) => {
-        deleteDoc(doc.ref);
-      });
+  deleteMultiple(keys: T[]) {
+    keys.map((obj) => {
+      this.utilsService
+        .getDocByKey(this.db, obj['key'])
+        .then(async (doc: any) => {
+          await deleteDoc(doc.ref);
+        })
+        .finally(() => {
+          this.getAll();
+        });
     });
   }
 

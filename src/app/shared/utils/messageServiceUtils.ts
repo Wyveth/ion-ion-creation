@@ -4,38 +4,43 @@ import { Resource } from 'src/app/resources/resource';
 export class MessageServiceUtils {
   constructor(
     private messageService: MessageService,
-    private resource: Resource,
+    private ressource: Resource,
   ) {}
 
   error(message?: string) {
     this.messageService.add({
       severity: 'error',
-      summary: '',
-      detail: message ?? '',
+      summary: this.ressource.toast.error,
+      detail: message ?? this.ressource.toast.errorDescription,
+      life: 3000,
     });
   }
 
-  warning(message?: string) {
+  success(message?: string) {
+    console.log(this.ressource.toast.success);
     this.messageService.add({
-      severity: 'warn',
-      summary: '',
-      detail: message ?? '',
+      severity: 'success',
+      summary: this.ressource.toast.success,
+      detail: message ?? this.ressource.toast.errorDescription,
+      life: 3000,
     });
   }
 
   info(message?: string) {
     this.messageService.add({
       severity: 'info',
-      summary: '',
-      detail: message ?? '',
+      summary: this.ressource.toast.info,
+      detail: message ?? this.ressource.toast.errorDescription,
+      life: 3000,
     });
   }
 
-  success(message?: string) {
+  warn(message?: string) {
     this.messageService.add({
-      severity: 'success',
-      summary: '',
-      detail: message ?? '',
+      severity: 'warn',
+      summary: this.ressource.toast.warning,
+      detail: message ?? this.ressource.toast.errorDescription,
+      life: 3000,
     });
   }
 }

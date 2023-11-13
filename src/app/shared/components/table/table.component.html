@@ -1,0 +1,236 @@
+<p-toolbar styleClass="mb-4 gap-2">
+  <ng-template pTemplate="left">
+    <button
+      pButton
+      pRipple
+      [label]="table.getMessage('create')"
+      icon="pi pi-plus"
+      class="mr-2 p-button-info"
+      (click)="open()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Supprimer"
+      icon="pi pi-trash"
+      class="p-button-danger"
+      (click)="deleteSelected()"
+      [disabled]="!selectedDatas || !selectedDatas.length"
+    ></button>
+  </ng-template>
+</p-toolbar>
+
+<p-table
+  #dt
+  [value]="table.getDatas()"
+  [rows]="table.getRows()"
+  [paginator]="table.getPaginator()"
+  [globalFilterFields]="table.getColumnsName()"
+  [tableStyle]="table.getTableStyle()"
+  [(selection)]="selectedDatas"
+  [resizableColumns]="table.getResizableColumns()"
+  [rowHover]="table.getRowHover()"
+  [dataKey]="table.getDataKey()"
+  [currentPageReportTemplate]="table.getCurrentPageReportTemplate()"
+  [showCurrentPageReport]="table.getShowCurrentPageReport()"
+  [rowsPerPageOptions]="table.getRowsPerPageOptions()"
+  [reorderableColumns]="table.getReorderableColumns()"
+  [columns]="table.getColumns()"
+  [exportHeader]="'customExportHeader'"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-between">
+      <h5 class="m-0">{{ table.getMessage("title") }}</h5>
+      <div class="flex space-x-2.5">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            #textInput
+            (input)="dt.filterGlobal(textInput.value, resource.filter.contains)"
+            [placeholder]="resource.table.search"
+          />
+        </span>
+
+        <div *ngFor="let item of exportButton">
+          <button
+            *ngIf="item.show"
+            type="button"
+            pButton
+            pRipple
+            [icon]="item.prefix?.class ?? ''"
+            (click)="
+              item.actionTrigger === 'click' && item.text === 'CSV'
+                ? dt.exportCSV()
+                : item.actionTrigger === 'click' && item.text === 'CSVF'
+                ? dt.exportCSV({ selectionOnly: true })
+                : item.action(item)
+            "
+            [ngClass]="item.class"
+            [pTooltip]="item.tooltip?.text"
+            [tooltipPosition]="item.tooltip?.position"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th
+        *ngFor="let col of table.getColumns()"
+        [pSortableColumn]="col.field"
+        pReorderableColumn
+      >
+        <ng-container [ngSwitch]="col.getType()">
+          <ng-container *ngSwitchCase="'checkbox'">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </ng-container>
+          <ng-container>
+            {{ col.header
+            }}<p-sortIcon
+              *ngIf="col.getType() != 'checkbox' && col.getType() != 'action'"
+              [field]="col.field"
+            ></p-sortIcon
+          ></ng-container>
+        </ng-container>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData>
+    <tr>
+      <td *ngFor="let col of table.getColumns()">
+        <ng-container [ngSwitch]="col.getType()">
+          <ng-container *ngSwitchCase="'text'">
+            <p ngSwitch="col.type == text">{{ rowData[col.field] }}</p>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'checkbox'">
+            <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'action'">
+            <button
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-warning mr-2"
+              (click)="edit(rowData)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-danger"
+              (click)="delete(rowData)"
+            ></button>
+          </ng-container>
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="dataDialog"
+  [style]="{ width: '450px' }"
+  header="Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content" [formGroup]="form">
+    <div class="field">
+      <label for="code">Code</label>
+      <input
+        type="text"
+        pInputText
+        formControlName="code"
+        [(ngModel)]="data.code"
+        required
+        autofocus
+      />
+      <div
+        *ngIf="
+          form.get('code')?.invalid &&
+          (form.get('code')?.dirty || form.get('code')?.touched)
+        "
+      >
+        <small class="p-error" *ngIf="form.get('code')?.hasError('required')"
+          >Code est obligatoire.</small
+        >
+      </div>
+    </div>
+    <div class="field">
+      <label for="libelle">Libelle</label>
+      <input
+        type="text"
+        pInputText
+        formControlName="libelle"
+        [(ngModel)]="data.libelle"
+        required
+        autofocus
+      />
+      <div
+        *ngIf="
+          form.get('libelle')?.invalid &&
+          (form.get('libelle')?.dirty || form.get('libelle')?.touched)
+        "
+      >
+        <small class="p-error" *ngIf="form.get('libelle')?.hasError('required')"
+          >Libelle est obligatoire.</small
+        >
+      </div>
+    </div>
+    <div class="field">
+      <label for="description">Description</label>
+      <input
+        type="text"
+        pInputText
+        formControlName="description"
+        [(ngModel)]="data.description"
+        required
+        autofocus
+      />
+      <div
+        *ngIf="
+          form.get('description')?.invalid &&
+          (form.get('description')?.dirty || form.get('description')?.touched)
+        "
+      >
+        <small
+          class="p-error"
+          *ngIf="form.get('description')?.hasError('required')"
+          >Description est obligatoire.</small
+        >
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      [label]="resource.form.cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      [disabled]="form.invalid"
+      [label]="resource.form.save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="save()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog
+  [style]="{ width: '450px' }"
+  [acceptLabel]="resource.form.yes"
+  [rejectLabel]="resource.form.no"
+></p-confirmDialog>
+
+<p-toast></p-toast>

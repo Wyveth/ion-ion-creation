@@ -143,16 +143,36 @@ $gray-900: #212529;
 
 .p-button {
   background-color: transparent;
-  color: #4f46e5;
+  color: $white;
   border-color: transparent;
-  
+
   &.p-button-info,
   .p-buttonset.p-button-info > .p-button,
   .p-splitbutton.p-button-info > .p-button {
-    color: $white;
     background: $info;
     border: 1px solid $info-600;
   }
+  &.p-button-text,
+  .p-buttonset.p-button-text > .p-button,
+  .p-splitbutton.p-button-text > .p-button {
+    color: $info;
+    border: 1px solid $info-600;
+  }
+
+  &.p-confirm-dialog-accept,
+  .p-buttonset.p-confirm-dialog-accept > .p-button,
+  .p-splitbutton.p-confirm-dialog-accept > .p-button {
+    color: $info;
+    border: 1px solid $info-600;
+  }
+
+  &.p-confirm-dialog-reject,
+  .p-buttonset.p-confirm-dialog-reject > .p-button,
+  .p-splitbutton.p-confirm-dialog-reject > .p-button {
+    color: $danger;
+    border: 1px solid $danger-600;
+  }
+
   &.p-button-success,
   .p-buttonset.p-button-success > .p-button,
   .p-splitbutton.p-button-success > .p-button {

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TagComponent } from 'src/app/views/administration/tag/tag.component';
 import { LayoutComponent } from '../components/administration/layout/layout.component';
 
 const routes: Routes = [

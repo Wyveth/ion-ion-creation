@@ -1,6 +1,6 @@
-import { BaseInterface } from '../../interface/abstracts/base.interface';
+import { IBase } from '../../interface/abstracts/base.interface';
 
-export class Base implements BaseInterface {
+export class Base implements IBase {
   key: string;
   created_at?: string;
   updated_at?: string;

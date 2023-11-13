@@ -2,7 +2,7 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { GeneriqueService } from './generique.service';
-import { TagInterface } from '../models/interface/concretes/tag.interface';
+import { ITag } from '../models/interface/concretes/tag.interface';
 
 describe('Service: Tag', () => {
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('Service: Tag', () => {
 
   it('should ...', inject(
     [GeneriqueService],
-    (service: GeneriqueService<TagInterface>) => {
+    (service: GeneriqueService<ITag>) => {
       expect(service).toBeTruthy();
     },
   ));
