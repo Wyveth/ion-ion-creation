@@ -124,7 +124,8 @@ export interface Filter {
 
 //#region Form
 export interface Form {
-  mandatory: string;
+  mandatoryM: string;
+  mandatoryF: string;
   invalidEmail: string;
   invalidUrl: string;
   invalidPatternMessage: string;

@@ -6,7 +6,6 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonModule } from 'primeng/button';
@@ -33,6 +32,9 @@ import * as FileSaver from 'file-saver';
 import { ExportColumn } from '../../models/tables/column';
 import { Button } from '../../types/button.type';
 import { String } from 'typescript-string-operations';
+import { GenericFormGroup } from '../../models/forms/generic-formgroup';
+import { capitalize } from '../../utils/string-capitalize';
+import { pluralize } from '../../utils/string-pluralize';
 
 @Component({
   selector: 'app-table',
@@ -62,6 +64,7 @@ export class TableComponent<T extends IBase>
   implements OnInit, OnDestroy
 {
   @Input() table!: Tables<T>;
+  @Input() formGroup!: GenericFormGroup;
 
   selectedDatas!: T[] | (T & { key: string })[] | null;
   dataSubscription!: Subscription;
@@ -88,7 +91,6 @@ export class TableComponent<T extends IBase>
     protected confirmationService: ConfirmationService,
   ) {
     super(store, resources, messageService);
-    this.initForm();
   }
 
   override ngOnInit() {
@@ -99,7 +101,7 @@ export class TableComponent<T extends IBase>
         this.table.setDatas(datas);
       },
     );
-
+    this.initForm();
     this.initExport();
   }
 
@@ -150,8 +152,8 @@ export class TableComponent<T extends IBase>
         this.resetSelected();
         this.messageServiceUtils.success(
           String.format(
-            this.resource.table.deleteP_format,
-            this.table.getMessage('modelsName'),
+            this.resource.table.delete_format,
+            capitalize(this.table.getMessage('modelName')),
           ),
         );
       },
@@ -173,8 +175,8 @@ export class TableComponent<T extends IBase>
         this.resetSelected();
         this.messageServiceUtils.success(
           String.format(
-            this.resource.table.delete_format,
-            this.table.getMessage('modelName'),
+            this.resource.table.deleteP_format,
+            capitalize(this.table.getMessage('modelsName')),
           ),
         );
       },
@@ -189,15 +191,16 @@ export class TableComponent<T extends IBase>
         this.messageServiceUtils.success(
           String.format(
             this.resource.table.updateOK,
-            this.table.getMessage('modelName'),
+            capitalize(this.table.getMessage('modelName')),
           ),
         );
       } else {
         this.create();
+        console.log('test', this.resource.table);
         this.messageServiceUtils.success(
           String.format(
             this.resource.table.newOK,
-            this.table.getMessage('modelName'),
+            capitalize(this.table.getMessage('modelName')),
           ),
         );
       }
@@ -246,10 +249,17 @@ export class TableComponent<T extends IBase>
 
   //#region Form
   initForm() {
-    this.form = new FormGroup({
-      code: new FormControl<string>('', Validators.required),
-      libelle: new FormControl<string>('', Validators.required),
-      description: new FormControl<string>('', Validators.required),
+    this.form = new FormGroup({});
+
+    this.formGroup.formControls.forEach((formControl) => {
+      this.form.addControl(
+        formControl.getName(),
+        new FormControl(
+          formControl.value as typeof formControl.value,
+          formControl.validatorOrOpts,
+          formControl.asyncValidator,
+        ),
+      );
     });
   }
 
@@ -268,7 +278,7 @@ export class TableComponent<T extends IBase>
       }
     });
   }
-  //endregion Form
+  //#endregion Form
 
   //#region Export
   initExport() {

@@ -139,69 +139,30 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content" [formGroup]="form">
-    <div class="field">
-      <label for="code">Code</label>
-      <input
-        type="text"
-        pInputText
-        formControlName="code"
-        [(ngModel)]="data.code"
-        required
-        autofocus
-      />
-      <div
-        *ngIf="
-          form.get('code')?.invalid &&
-          (form.get('code')?.dirty || form.get('code')?.touched)
-        "
-      >
-        <small class="p-error" *ngIf="form.get('code')?.hasError('required')"
-          >Code est obligatoire.</small
+    <div class="field space-y-4" *ngFor="let item of formGroup.formControls">
+      <span class="">
+        <label [htmlFor]="item.getName()">{{ item.getText() }}</label>
+        <input
+          [id]="item.getName()"
+          pInputText
+          [formControlName]="item.getName()"
+          [(ngModel)]="data[item.getName()]"
+        />
+      </span>
+      <div *ngFor="let error of item.getValidatorMessagesCustom()">
+        <div
+          *ngIf="
+            form.get(item.getName())?.invalid &&
+            (form.get(item.getName())?.dirty ||
+              form.get(item.getName())?.touched)
+          "
         >
-      </div>
-    </div>
-    <div class="field">
-      <label for="libelle">Libelle</label>
-      <input
-        type="text"
-        pInputText
-        formControlName="libelle"
-        [(ngModel)]="data.libelle"
-        required
-        autofocus
-      />
-      <div
-        *ngIf="
-          form.get('libelle')?.invalid &&
-          (form.get('libelle')?.dirty || form.get('libelle')?.touched)
-        "
-      >
-        <small class="p-error" *ngIf="form.get('libelle')?.hasError('required')"
-          >Libelle est obligatoire.</small
-        >
-      </div>
-    </div>
-    <div class="field">
-      <label for="description">Description</label>
-      <input
-        type="text"
-        pInputText
-        formControlName="description"
-        [(ngModel)]="data.description"
-        required
-        autofocus
-      />
-      <div
-        *ngIf="
-          form.get('description')?.invalid &&
-          (form.get('description')?.dirty || form.get('description')?.touched)
-        "
-      >
-        <small
-          class="p-error"
-          *ngIf="form.get('description')?.hasError('required')"
-          >Description est obligatoire.</small
-        >
+          <small
+            class="p-error"
+            *ngIf="form.get(item.getName())?.hasError(error.key)"
+            >{{ error.message }}</small
+          >
+        </div>
       </div>
     </div>
   </ng-template>

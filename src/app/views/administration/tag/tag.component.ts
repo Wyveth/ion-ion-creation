@@ -11,6 +11,13 @@ import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { Store } from '@ngrx/store';
 import { AppResource } from 'src/app/app.resource';
 import { State } from 'src/app/core/state/core.state';
+import { Validators } from '@angular/forms';
+import {
+  GenericFormGroup,
+  primitive,
+} from 'src/app/shared/models/forms/generic-formgroup';
+import { GenericFormControl } from 'src/app/shared/models/forms/generic-formcontrol';
+import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-tag',
@@ -26,6 +33,7 @@ import { State } from 'src/app/core/state/core.state';
 })
 export class TagComponent extends BaseComponent implements OnInit {
   tags!: Tables<Tag>;
+  form!: GenericFormGroup;
 
   constructor(
     store: Store<State>,
@@ -34,7 +42,12 @@ export class TagComponent extends BaseComponent implements OnInit {
   ) {
     super(store, resources, messageService);
 
-    let columns: Column<ColType>[] = [
+    this.initTable();
+    this.initForm();
+  }
+
+  initColumns(): Column<ColType>[] {
+    return [
       new Column<'checkbox'>('', '', 'checkbox', [], [], {
         width: 4,
       }),
@@ -56,13 +69,72 @@ export class TagComponent extends BaseComponent implements OnInit {
         width: 4,
       }),
     ];
+  }
 
+  initTable() {
     this.tags = new Tables<Tag>(
       'tag',
       new Tag('', '', '', ''),
       new Array<Tag>(),
-      columns,
+      this.initColumns(),
       this.resource,
     );
+  }
+
+  initForm() {
+    let gFormControls: GenericFormControl<primitive>[] = [
+      new GenericFormControl<string>(
+        'code',
+        'Code',
+        'string',
+        '',
+        Validators.required,
+        null,
+        [
+          {
+            key: 'required',
+            message: String.format(
+              this.resource.form.mandatoryM,
+              this.resource.db.properties.code,
+            ),
+          },
+        ],
+      ),
+      new GenericFormControl<string>(
+        'libelle',
+        'Libellé',
+        'string',
+        '',
+        Validators.required,
+        null,
+        [
+          {
+            key: 'required',
+            message: String.format(
+              this.resource.form.mandatoryM,
+              this.resource.db.properties.libelle,
+            ),
+          },
+        ],
+      ),
+      new GenericFormControl<string>(
+        'description',
+        'Description',
+        'string',
+        '',
+        Validators.required,
+        null,
+        [
+          {
+            key: 'required',
+            message: String.format(
+              this.resource.form.mandatoryF,
+              this.resource.db.properties.description,
+            ),
+          },
+        ],
+      ),
+    ];
+    this.form = new GenericFormGroup(gFormControls);
   }
 }
