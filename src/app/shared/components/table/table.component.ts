@@ -34,7 +34,7 @@ import { Button } from '../../types/button.type';
 import { String } from 'typescript-string-operations';
 import { GenericFormGroup } from '../../models/forms/generic-formgroup';
 import { capitalize } from '../../utils/string-capitalize';
-import { pluralize } from '../../utils/string-pluralize';
+import { FormControlComponent } from '../form-control/form-control.component';
 
 @Component({
   selector: 'app-table',
@@ -56,6 +56,7 @@ import { pluralize } from '../../utils/string-pluralize';
     PaginatorModule,
     ChartModule,
     MenuModule,
+    FormControlComponent,
   ],
   providers: [MessageService],
 })
@@ -196,7 +197,6 @@ export class TableComponent<T extends IBase>
         );
       } else {
         this.create();
-        console.log('test', this.resource.table);
         this.messageServiceUtils.success(
           String.format(
             this.resource.table.newOK,

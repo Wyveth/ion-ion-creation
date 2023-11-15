@@ -17,7 +17,6 @@ export class MessageServiceUtils {
   }
 
   success(message?: string) {
-    console.log(this.ressource.toast.success);
     this.messageService.add({
       severity: 'success',
       summary: this.ressource.toast.success,

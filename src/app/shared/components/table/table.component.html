@@ -139,30 +139,13 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content" [formGroup]="form">
-    <div class="field space-y-4" *ngFor="let item of formGroup.formControls">
-      <span class="">
-        <label [htmlFor]="item.getName()">{{ item.getText() }}</label>
-        <input
-          [id]="item.getName()"
-          pInputText
-          [formControlName]="item.getName()"
-          [(ngModel)]="data[item.getName()]"
-        />
-      </span>
-      <div *ngFor="let error of item.getValidatorMessagesCustom()">
-        <div
-          *ngIf="
-            form.get(item.getName())?.invalid &&
-            (form.get(item.getName())?.dirty ||
-              form.get(item.getName())?.touched)
-          "
-        >
-          <small
-            class="p-error"
-            *ngIf="form.get(item.getName())?.hasError(error.key)"
-            >{{ error.message }}</small
-          >
-        </div>
+    <div class="flex flex-col space-y-4">
+      <div class="field" *ngFor="let item of formGroup.formControls">
+        <app-form-control
+          [control]="item"
+          [form]="form"
+          [data]="data"
+        ></app-form-control>
       </div>
     </div>
   </ng-template>

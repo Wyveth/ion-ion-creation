@@ -18,6 +18,7 @@ import {
 } from 'src/app/shared/models/forms/generic-formgroup';
 import { GenericFormControl } from 'src/app/shared/models/forms/generic-formcontrol';
 import { String } from 'typescript-string-operations';
+import { FormControlType } from 'src/app/shared/types/form-control.type';
 
 @Component({
   selector: 'app-tag',
@@ -82,11 +83,12 @@ export class TagComponent extends BaseComponent implements OnInit {
   }
 
   initForm() {
-    let gFormControls: GenericFormControl<primitive>[] = [
-      new GenericFormControl<string>(
+    let gFormControls: GenericFormControl<FormControlType>[] = [
+      new GenericFormControl<'text'>(
         'code',
         'Code',
-        'string',
+        'text',
+        { placeholder: 'Code' },
         '',
         Validators.required,
         null,
@@ -100,10 +102,11 @@ export class TagComponent extends BaseComponent implements OnInit {
           },
         ],
       ),
-      new GenericFormControl<string>(
+      new GenericFormControl<'text'>(
         'libelle',
         'Libellé',
-        'string',
+        'text',
+        { placeholder: 'Code' },
         '',
         Validators.required,
         null,
@@ -117,10 +120,11 @@ export class TagComponent extends BaseComponent implements OnInit {
           },
         ],
       ),
-      new GenericFormControl<string>(
+      new GenericFormControl<'text'>(
         'description',
         'Description',
-        'string',
+        'text',
+        { placeholder: 'Code' },
         '',
         Validators.required,
         null,

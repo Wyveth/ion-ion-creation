@@ -1,0 +1,141 @@
+<ng-container [formGroup]="form" [ngSwitch]="control.getType()">
+  <label [for]="control.getName()">{{ control.getText() }}</label>
+  <ng-container *ngSwitchCase="'autocomplete'">
+    <p-autoComplete
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+      [suggestions]="control.getParameter('suggestions')"
+      (completeMethod)="search($event)"
+    ></p-autoComplete>
+  </ng-container>
+  <ng-container *ngSwitchCase="'calendar'">
+    <p-calendar
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+      [selectionMode]="control.getParameter('selectionMode')"
+      [readonlyInput]="true"
+    ></p-calendar>
+  </ng-container>
+  <ng-container *ngSwitchCase="'checkbox'">
+    <div
+      *ngFor="let option of control.getParameter('options')"
+      class="field-checkbox"
+    >
+      <p-checkbox
+        [name]="control.getName()"
+        [formControlName]="control.getName()"
+        [(ngModel)]="data[control.getName()]"
+        [value]="option"
+        [inputId]="option[0]"
+      ></p-checkbox>
+      <label [for]="option[0]">{{ option[1] }}</label>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'currency'">
+    <p-inputNumber
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+      [mode]="control.getParameter('mode')"
+      [inputId]="control.getName()"
+      [currency]="control.getParameter('currency')"
+      [locale]="control.getParameter('locale')"
+    >
+    </p-inputNumber>
+  </ng-container>
+  <ng-container *ngSwitchCase="'dropdown'">
+    <p-dropdown
+      [options]="control.getParameter('options')"
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+      [placeholder]="control.getParameter('placeholder')"
+      [editable]="true"
+      [optionLabel]="control.getParameter('optionLabel')"
+    ></p-dropdown>
+  </ng-container>
+  <ng-container *ngSwitchCase="'editor'">
+    <p-editor
+      [formControlName]="control.getName()"
+      [style]="{ height: '320px' }"
+    ></p-editor>
+  </ng-container>
+  <ng-container *ngSwitchCase="'text'">
+    <input
+      [id]="control.getName()"
+      pInputText
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+      [placeholder]="control.getParameter('placeholder')"
+    />
+  </ng-container>
+  <ng-container *ngSwitchCase="'textarea'">
+    <textarea
+      [rows]="control.getParameter('rows')"
+      [cols]="control.getParameter('cols')"
+      [id]="control.getName()"
+      pInputTextarea
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+    ></textarea>
+  </ng-container>
+  <ng-container *ngSwitchCase="'number'">
+    <p-inputNumber
+      [inputId]="control.getName()"
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+    ></p-inputNumber>
+  </ng-container>
+  <ng-container *ngSwitchCase="'multiselect'">
+    <p-multiSelect
+      [options]="control.getParameter('options')"
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+      [optionLabel]="control.getParameter('optionLabel')"
+      [placeholder]="control.getParameter('placeholder')"
+    ></p-multiSelect>
+  </ng-container>
+  <ng-container *ngSwitchCase="'radio'">
+    <div
+      *ngFor="let option of control.getParameter('options')"
+      class="field-checkbox"
+    >
+      <p-radioButton
+        [inputId]="control.getName()"
+        [value]="option"
+        [formControlName]="control.getName()"
+        [(ngModel)]="data[control.getName()]"
+      ></p-radioButton>
+      <label [for]="option[0]" class="ml-2">{{ option[1] }}</label>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'rating'">
+    <p-rating
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+    ></p-rating>
+  </ng-container>
+  <ng-container *ngSwitchCase="'select'">
+    <p-selectButton
+      [options]="control.getParameter('options')"
+      [formControlName]="control.getName()"
+      [(ngModel)]="data[control.getName()]"
+      [optionLabel]="control.getParameter('optionLabel')"
+      [optionValue]="control.getParameter('optionValue')"
+    ></p-selectButton>
+  </ng-container>
+
+  <div *ngFor="let error of control.getValidatorMessagesCustom()">
+    <div
+      *ngIf="
+        form.get(control.getName())?.invalid &&
+        (form.get(control.getName())?.dirty ||
+          form.get(control.getName())?.touched)
+      "
+    >
+      <small
+        class="p-error"
+        *ngIf="form.get(control.getName())?.hasError(error.key)"
+        >{{ error.message }}</small
+      >
+    </div>
+  </div>
+</ng-container>

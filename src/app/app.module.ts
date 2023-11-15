@@ -1,7 +1,4 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 
@@ -22,9 +19,6 @@ import {
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { AppConfig } from './app.config';
 import { AppResource } from './app.resource';
-import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import { SharedModule } from './shared/modules/shared.module';
 
 export function initConfig(config: AppConfig) {

@@ -2,20 +2,24 @@ import {
   FormControlOptions,
   ValidatorFn,
   AsyncValidatorFn,
+  FormControl,
 } from '@angular/forms';
+import { FormControlType, Param } from '../../types/form-control.type';
 
 export interface ValidatorMessageCustom {
   key: string;
   message: string;
 }
 
-export class GenericFormControl<T> {
+export class GenericFormControl<T extends FormControlType> {
   /** @var name Nom du FormControl */
   private name: string;
   /** @var text Text du label */
   private text: string;
   /** @var type Type du FormControl */
   private type: string;
+  /** @var parameters Type du FormControl */
+  private parameters: Param<T>;
   /** @var value Value du FormControl */
   value: T;
 
@@ -42,7 +46,8 @@ export class GenericFormControl<T> {
     name: string,
     text: string,
     type: string,
-    value: T,
+    parameters: Param<T>,
+    value: any,
     validatorOrOpts?:
       | FormControlOptions
       | ValidatorFn
@@ -55,6 +60,7 @@ export class GenericFormControl<T> {
     this.name = name;
     this.text = text;
     this.type = type;
+    this.parameters = parameters;
     this.value = value;
     this.validatorOrOpts = validatorOrOpts;
     this.asyncValidator = asyncValidator;
@@ -72,6 +78,17 @@ export class GenericFormControl<T> {
 
   getType(): string {
     return this.type;
+  }
+
+  getParameters(): Param<T> {
+    return this.parameters;
+  }
+
+  getParameter(key: string): any {
+    const parameter = this.parameters as typeof this.parameters & {
+      [key: string]: any;
+    };
+    return parameter[key];
   }
 
   getValue(): T {
