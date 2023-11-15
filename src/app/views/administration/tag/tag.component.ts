@@ -102,7 +102,7 @@ export class TagComponent extends BaseComponent implements OnInit {
           },
         ],
       ),
-      new GenericFormControl<'text'>(
+      new GenericFormControl<'text', string>(
         'libelle',
         'Libellé',
         'text',
