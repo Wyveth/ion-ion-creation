@@ -88,8 +88,8 @@ export class TagComponent extends BaseComponent implements OnInit {
         'code',
         'Code',
         'text',
-        { placeholder: 'Code' },
-        '',
+        null,
+        null,
         Validators.required,
         null,
         [
@@ -106,8 +106,8 @@ export class TagComponent extends BaseComponent implements OnInit {
         'libelle',
         'Libellé',
         'text',
-        { placeholder: 'Code' },
-        '',
+        null,
+        null,
         Validators.required,
         null,
         [
@@ -124,8 +124,8 @@ export class TagComponent extends BaseComponent implements OnInit {
         'description',
         'Description',
         'text',
-        { placeholder: 'Code' },
-        '',
+        null,
+        null,
         Validators.required,
         null,
         [

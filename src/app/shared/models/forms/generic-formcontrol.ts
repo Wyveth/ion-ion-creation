@@ -19,7 +19,7 @@ export class GenericFormControl<T extends FormControlType> {
   /** @var type Type du FormControl */
   private type: string;
   /** @var parameters Type du FormControl */
-  private parameters: Param<T>;
+  private parameters: Param<T> | null;
   /** @var value Value du FormControl */
   value: T;
 
@@ -46,7 +46,7 @@ export class GenericFormControl<T extends FormControlType> {
     name: string,
     text: string,
     type: string,
-    parameters: Param<T>,
+    parameters: Param<T> | null,
     value: any,
     validatorOrOpts?:
       | FormControlOptions
@@ -80,7 +80,7 @@ export class GenericFormControl<T extends FormControlType> {
     return this.type;
   }
 
-  getParameters(): Param<T> {
+  getParameters(): Param<T> | null {
     return this.parameters;
   }
 
