@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
-  standalone: true,
-  imports: [CommonModule, ToolbarModule, ButtonModule, MenuItemComponent],
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.scss'],
+    imports: [CommonModule, ToolbarModule, ButtonModule, MenuItemComponent]
 })
 export class MenuComponent implements OnInit {
   model: any[] = [];

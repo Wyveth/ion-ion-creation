@@ -5,11 +5,10 @@ import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 
 @Component({
-  selector: 'app-best-selling-product',
-  templateUrl: './best-selling-product.component.html',
-  styleUrls: ['./best-selling-product.component.scss'],
-  standalone: true,
-  imports: [CommonModule, MenuModule, ButtonModule],
+    selector: 'app-best-selling-product',
+    templateUrl: './best-selling-product.component.html',
+    styleUrls: ['./best-selling-product.component.scss'],
+    imports: [CommonModule, MenuModule, ButtonModule]
 })
 export class BestSellingProductComponent implements OnInit {
   items!: MenuItem[];

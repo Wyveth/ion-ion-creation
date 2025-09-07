@@ -5,11 +5,10 @@ import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 
 @Component({
-  selector: 'app-sales-overview',
-  templateUrl: './sales-overview.component.html',
-  styleUrls: ['./sales-overview.component.scss'],
-  standalone: true,
-  imports: [CommonModule, ChartModule],
+    selector: 'app-sales-overview',
+    templateUrl: './sales-overview.component.html',
+    styleUrls: ['./sales-overview.component.scss'],
+    imports: [CommonModule, ChartModule]
 })
 export class SalesOverviewComponent implements OnInit, OnDestroy {
   chartData: any;

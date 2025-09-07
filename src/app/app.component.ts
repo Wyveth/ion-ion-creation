@@ -3,8 +3,9 @@ import { PrimeNGConfig } from 'primeng/api';
 import { LayoutService } from './shared/services/layout.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent implements OnInit {
   title = 'ion-ion-creation';

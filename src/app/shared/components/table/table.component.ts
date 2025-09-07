@@ -37,28 +37,27 @@ import { capitalize } from '../../utils/string-capitalize';
 import { FormControlComponent } from '../form-control/form-control.component';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    TableModule,
-    FontAwesomeModule,
-    ButtonModule,
-    ToolbarModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
-    PaginatorModule,
-    ChartModule,
-    MenuModule,
-    FormControlComponent,
-  ],
-  providers: [MessageService],
+    selector: 'app-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.scss'],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        TableModule,
+        FontAwesomeModule,
+        ButtonModule,
+        ToolbarModule,
+        ToastModule,
+        DialogModule,
+        ConfirmDialogModule,
+        PaginatorModule,
+        ChartModule,
+        MenuModule,
+        FormControlComponent,
+    ],
+    providers: [MessageService]
 })
 export class TableComponent<T extends IBase>
   extends BaseComponent

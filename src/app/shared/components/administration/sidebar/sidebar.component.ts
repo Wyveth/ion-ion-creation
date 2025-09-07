@@ -3,11 +3,10 @@ import { LayoutService } from '../../../services/layout.service';
 import { MenuComponent } from '../menu/menu.component';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
-  standalone: true,
-  imports: [MenuComponent],
+    selector: 'app-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss'],
+    imports: [MenuComponent]
 })
 export class SidebarComponent {
   constructor(

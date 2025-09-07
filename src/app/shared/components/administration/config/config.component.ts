@@ -8,17 +8,16 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-config',
-  templateUrl: './config.component.html',
-  styleUrls: ['./config.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    SidebarModule,
-    RadioButtonModule,
-    InputSwitchModule,
-    FormsModule,
-  ],
+    selector: 'app-config',
+    templateUrl: './config.component.html',
+    styleUrls: ['./config.component.scss'],
+    imports: [
+        CommonModule,
+        SidebarModule,
+        RadioButtonModule,
+        InputSwitchModule,
+        FormsModule,
+    ]
 })
 export class ConfigComponent {
   @Input() minimal: boolean = false;

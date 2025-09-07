@@ -22,27 +22,26 @@ import {
 import { FormControlType } from '../../types/form-control.type';
 
 @Component({
-  selector: 'app-form-control',
-  templateUrl: './form-control.component.html',
-  styleUrls: ['./form-control.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    AutoCompleteModule,
-    CalendarModule,
-    CheckboxModule,
-    DropdownModule,
-    EditorModule,
-    InputTextareaModule,
-    InputNumberModule,
-    MultiSelectModule,
-    RadioButtonModule,
-    RatingModule,
-    SelectButtonModule,
-  ],
+    selector: 'app-form-control',
+    templateUrl: './form-control.component.html',
+    styleUrls: ['./form-control.component.scss'],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        AutoCompleteModule,
+        CalendarModule,
+        CheckboxModule,
+        DropdownModule,
+        EditorModule,
+        InputTextareaModule,
+        InputNumberModule,
+        MultiSelectModule,
+        RadioButtonModule,
+        RatingModule,
+        SelectButtonModule,
+    ]
 })
 export class FormControlComponent implements OnInit {
   @Input() control!: GenericFormControl<FormControlType>;

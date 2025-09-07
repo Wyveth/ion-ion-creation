@@ -12,11 +12,10 @@ interface Product {
 }
 
 @Component({
-  selector: 'app-recent-sales',
-  templateUrl: './recent-sales.component.html',
-  styleUrls: ['./recent-sales.component.scss'],
-  standalone: true,
-  imports: [CommonModule, TableModule, ButtonModule],
+    selector: 'app-recent-sales',
+    templateUrl: './recent-sales.component.html',
+    styleUrls: ['./recent-sales.component.scss'],
+    imports: [CommonModule, TableModule, ButtonModule]
 })
 export class RecentSalesComponent implements OnInit {
   products!: Product[];

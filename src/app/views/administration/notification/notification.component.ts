@@ -5,11 +5,10 @@ import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 
 @Component({
-  selector: 'app-notification',
-  templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.scss'],
-  standalone: true,
-  imports: [CommonModule, MenuModule, ButtonModule],
+    selector: 'app-notification',
+    templateUrl: './notification.component.html',
+    styleUrls: ['./notification.component.scss'],
+    imports: [CommonModule, MenuModule, ButtonModule]
 })
 export class NotificationComponent implements OnInit {
   items!: MenuItem[];

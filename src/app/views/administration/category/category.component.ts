@@ -18,16 +18,15 @@ import { FormControlType } from 'src/app/shared/types/form-control.type';
 import { String } from 'typescript-string-operations';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
-  imports: [CommonModule, TableComponent],
-  standalone: true,
-  providers: [
-    ConfirmationService,
-    MessageService,
-    [{ provide: 'collectionName', useValue: 'categories' }, GeneriqueService],
-  ],
+    selector: 'app-category',
+    templateUrl: './category.component.html',
+    styleUrls: ['./category.component.scss'],
+    imports: [CommonModule, TableComponent],
+    providers: [
+        ConfirmationService,
+        MessageService,
+        [{ provide: 'collectionName', useValue: 'categories' }, GeneriqueService],
+    ]
 })
 export class CategoryComponent extends BaseComponent implements OnInit {
   table!: Tables<Category>;

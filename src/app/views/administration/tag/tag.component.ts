@@ -18,16 +18,15 @@ import { FormControlType } from 'src/app/shared/types/form-control.type';
 import { Gender } from 'src/app/api/models/enum/gender.enum';
 
 @Component({
-  selector: 'app-tag',
-  templateUrl: './tag.component.html',
-  styleUrls: ['./tag.component.scss'],
-  imports: [CommonModule, TableComponent],
-  standalone: true,
-  providers: [
-    ConfirmationService,
-    MessageService,
-    [{ provide: 'collectionName', useValue: 'tags' }, GeneriqueService],
-  ],
+    selector: 'app-tag',
+    templateUrl: './tag.component.html',
+    styleUrls: ['./tag.component.scss'],
+    imports: [CommonModule, TableComponent],
+    providers: [
+        ConfirmationService,
+        MessageService,
+        [{ provide: 'collectionName', useValue: 'tags' }, GeneriqueService],
+    ]
 })
 export class TagComponent extends BaseComponent implements OnInit {
   table!: Tables<Tag>;

@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
 import { MessageServiceUtils } from '../../utils/messageServiceUtils';
 
 @Component({
-  selector: 'app-base',
-  templateUrl: './base.component.html',
-  styleUrls: ['./base.component.scss'],
+    selector: 'app-base',
+    templateUrl: './base.component.html',
+    styleUrls: ['./base.component.scss'],
+    standalone: false
 })
 export class BaseComponent implements OnInit {
   public resource: Resource;

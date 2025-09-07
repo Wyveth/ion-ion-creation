@@ -7,18 +7,17 @@ import { NotificationComponent } from '../notification/notification.component';
 import { SalesOverviewComponent } from '../sales-overview/sales-overview.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    ResumeComponent,
-    RecentSalesComponent,
-    BestSellingProductComponent,
-    SalesOverviewComponent,
-    NotificationComponent,
-  ],
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    imports: [
+        CommonModule,
+        ResumeComponent,
+        RecentSalesComponent,
+        BestSellingProductComponent,
+        SalesOverviewComponent,
+        NotificationComponent,
+    ]
 })
 export class DashboardComponent implements OnInit {
   constructor() {}

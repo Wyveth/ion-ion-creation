@@ -20,12 +20,11 @@ import { LayoutService } from 'src/app/shared/services/layout.service';
 import { MenuService } from 'src/app/shared/services/menu.service';
 
 @Component({
-  selector: '[app-menuitem]',
-  templateUrl: './menu-item.component.html',
-  styleUrls: ['./menu-item.component.scss'],
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  template: `
+    selector: '[app-menuitem]',
+    templateUrl: './menu-item.component.html',
+    styleUrls: ['./menu-item.component.scss'],
+    imports: [CommonModule, RouterModule],
+    template: `
     <ng-container>
       <div
         *ngIf="root && item.visible !== false"
@@ -98,26 +97,17 @@ import { MenuService } from 'src/app/shared/services/menu.service';
       </ul>
     </ng-container>
   `,
-  animations: [
-    trigger('children', [
-      state(
-        'collapsed',
-        style({
-          height: '0',
-        }),
-      ),
-      state(
-        'expanded',
-        style({
-          height: '*',
-        }),
-      ),
-      transition(
-        'collapsed <=> expanded',
-        animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'),
-      ),
-    ]),
-  ],
+    animations: [
+        trigger('children', [
+            state('collapsed', style({
+                height: '0',
+            })),
+            state('expanded', style({
+                height: '*',
+            })),
+            transition('collapsed <=> expanded', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')),
+        ]),
+    ]
 })
 export class MenuItemComponent implements OnInit, OnDestroy {
   @Input() item: any;

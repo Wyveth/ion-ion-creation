@@ -5,11 +5,10 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-topbar',
-  templateUrl: './topbar.component.html',
-  styleUrls: ['./topbar.component.scss'],
-  standalone: true,
-  imports: [CommonModule, RouterModule]
+    selector: 'app-topbar',
+    templateUrl: './topbar.component.html',
+    styleUrls: ['./topbar.component.scss'],
+    imports: [CommonModule, RouterModule]
 })
 export class TopBarComponent {
   items!: MenuItem[];
