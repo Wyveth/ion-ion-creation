@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ion-ion-creation:build:production"
+              "buildTarget": "ion-ion-creation:build:production"
             },
             "development": {
-              "browserTarget": "ion-ion-creation:build:development"
+              "buildTarget": "ion-ion-creation:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ion-ion-creation:build"
+            "buildTarget": "ion-ion-creation:build"
           }
         },
         "test": {
