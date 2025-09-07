@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { TagService } from 'src/app/api/services/tag.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TableComponent } from 'src/app/shared/components/table/table.component';
 import { GeneriqueService } from 'src/app/api/services/generique.service';
@@ -12,13 +11,11 @@ import { Store } from '@ngrx/store';
 import { AppResource } from 'src/app/app.resource';
 import { State } from 'src/app/core/state/core.state';
 import { Validators } from '@angular/forms';
-import {
-  GenericFormGroup,
-  primitive,
-} from 'src/app/shared/models/forms/generic-formgroup';
+import { GenericFormGroup } from 'src/app/shared/models/forms/generic-formgroup';
 import { GenericFormControl } from 'src/app/shared/models/forms/generic-formcontrol';
 import { String } from 'typescript-string-operations';
 import { FormControlType } from 'src/app/shared/types/form-control.type';
+import { Gender } from 'src/app/api/models/enum/gender.enum';
 
 @Component({
   selector: 'app-tag',
@@ -33,7 +30,7 @@ import { FormControlType } from 'src/app/shared/types/form-control.type';
   ],
 })
 export class TagComponent extends BaseComponent implements OnInit {
-  tags!: Tables<Tag>;
+  table!: Tables<Tag>;
   form!: GenericFormGroup;
 
   constructor(
@@ -73,12 +70,13 @@ export class TagComponent extends BaseComponent implements OnInit {
   }
 
   initTable() {
-    this.tags = new Tables<Tag>(
+    this.table = new Tables<Tag>(
       'tag',
       new Tag('', '', '', ''),
       new Array<Tag>(),
       this.initColumns(),
       this.resource,
+      Gender.m,
     );
   }
 
@@ -88,7 +86,7 @@ export class TagComponent extends BaseComponent implements OnInit {
         'code',
         'Code',
         'text',
-        null,
+        { placeholder: '' },
         null,
         Validators.required,
         null,
@@ -106,7 +104,7 @@ export class TagComponent extends BaseComponent implements OnInit {
         'libelle',
         'Libellé',
         'text',
-        null,
+        { placeholder: '' },
         null,
         Validators.required,
         null,
@@ -124,7 +122,7 @@ export class TagComponent extends BaseComponent implements OnInit {
         'description',
         'Description',
         'text',
-        null,
+        { placeholder: '' },
         null,
         Validators.required,
         null,

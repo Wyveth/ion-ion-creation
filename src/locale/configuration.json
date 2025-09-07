@@ -34,6 +34,8 @@
     "table": {
         "new": "Nouveau",
         "new_format": "Nouveau {0}",
+        "newF": "Nouvelle",
+        "newF_format": "Nouvelle {0}",
         "newOK": "{0} créé(e)",
         "edit": "Modifier",
         "edit_format": "Modifier {0}",

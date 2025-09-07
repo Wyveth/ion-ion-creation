@@ -55,6 +55,8 @@ export interface Toast {
 export interface Table {
   new: string;
   new_format: string;
+  newF: string;
+  newF_format: string;
   newOK: string;
   edit: string;
   edit_format: string;

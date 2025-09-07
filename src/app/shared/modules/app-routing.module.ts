@@ -21,6 +21,13 @@ const routes: Routes = [
             (m) => m.TagComponent,
           ),
       },
+      {
+        path: 'categories',
+        loadComponent: () =>
+          import(
+            'src/app/views/administration/category/category.component'
+          ).then((m) => m.CategoryComponent),
+      },
     ],
   },
   // { path: 'categories', loadChildren: () => import('./modules/category/category.module').then(m => m.CategoryModule) },

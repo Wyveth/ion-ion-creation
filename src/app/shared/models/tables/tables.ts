@@ -3,6 +3,7 @@ import { capitalize } from '../../utils/string-capitalize';
 import { ColType, Column } from './column';
 import { String } from 'typescript-string-operations';
 import { Resource } from 'src/app/resources/resource';
+import { Gender } from 'src/app/api/models/enum/gender.enum';
 
 export class Tables<T> {
   /** @var elementsType Nom du type des éléments à destination des messages */
@@ -66,6 +67,7 @@ export class Tables<T> {
     datas: T[],
     columns: Array<Column<ColType>>,
     resources: Resource,
+    gender: Gender.m | Gender.f,
     optionnals?: {
       paginator?: boolean;
       rows?: number;
@@ -99,7 +101,10 @@ export class Tables<T> {
         resources.table.manage,
         capitalize(pluralize(typeName)),
       ),
-      create: String.format(resources.table.new_format, typeName),
+      create:
+        gender == Gender.m
+          ? String.format(resources.table.new_format, typeName)
+          : String.format(resources.table.newF_format, typeName),
     };
 
     this.paginator = optionnals?.paginator ?? true;

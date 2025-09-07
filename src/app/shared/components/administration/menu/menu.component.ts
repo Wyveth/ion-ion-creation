@@ -29,6 +29,11 @@ export class MenuComponent implements OnInit {
         label: 'Paramétrage',
         items: [
           {
+            label: 'Catégories',
+            icon: 'pi pi-fw pi-id-card',
+            routerLink: ['/categories'],
+          },
+          {
             label: 'Tags',
             icon: 'pi pi-fw pi-id-card',
             routerLink: ['/tags'],
